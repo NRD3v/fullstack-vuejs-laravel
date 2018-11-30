@@ -101,9 +101,9 @@ class SearchController
 
     /**
      * Returns UI links list leading to non-empty result(s) with city/practice combo
-     * @return array
+     * @return JsonResponse
      */
-    public function findComboPracticesByCity(): array
+    public function findComboPracticesByCity(): JsonResponse
     {
         $response = [];
         $cities = $this->cityRepository->findAll();
@@ -124,6 +124,6 @@ class SearchController
                 }
             }
         }
-        return $response;
+        return response()->json($response);
     }
 }

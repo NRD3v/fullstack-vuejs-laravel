@@ -15,4 +15,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::any('/search', 'SearchController@search');
+Route::post('/search', 'SearchController@search');
+
+Route::get('/links', 'SearchController@findComboPracticesByCity');
