@@ -172,7 +172,9 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        \Medoucine\City\App\Laravel\CityServiceProvider::class,
         \Medoucine\Doctor\App\Laravel\DoctorServiceProvider::class,
+        \Medoucine\Practice\App\Laravel\PracticeServiceProvider::class,
 
     ],
 

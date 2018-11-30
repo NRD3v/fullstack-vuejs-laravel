@@ -9,17 +9,17 @@ interface IDoctorRepository
      * @param string $practice
      * @return array
      */
-    public function findDoctorsByCityAndPractice(string $city, string $practice): array;
+    public function findByCityAndPractice(string $city, string $practice): array;
 
     /**
      * @param string $city
      * @return array
      */
-    public function findDoctorsByCity(string $city): array;
+    public function findByCity(string $city): array;
 
     /**
      * @param string $practice
      * @return array
      */
-    public function findDoctorsByPractice(string $practice): array;
+    public function findByPractice(string $practice): array;
 }

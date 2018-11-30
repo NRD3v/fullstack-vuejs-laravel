@@ -21,56 +21,62 @@ class DoctorRepository implements IDoctorRepository
      * @param string $practice
      * @return array
      */
-    public function findDoctorsByCityAndPractice(string $city, string $practice): array
+    public function findByCityAndPractice(string $city, string $practice): array
     {
-        $foundDoctors = [];
+        $result = [];
         $file = file_get_contents(config('file.path.database'));
         $doctorsList = json_decode($file, true);
         foreach ($doctorsList as $doctor) {
             if ($doctor) {
                 if ($doctor['city'] === $city && in_array($practice, $doctor['practices'])) {
-                    array_push($foundDoctors, $this->doctorService->setDoctor($doctor));
+                    array_push($result, $this->doctorService->setDoctor($doctor));
                 }
+                unset($doctor);
             }
         }
-        return $foundDoctors;
+        unset($file, $doctorsList);
+        return $result;
     }
 
     /**
      * @param string $city
      * @return array
      */
-    public function findDoctorsByCity(string $city): array
+    public function findByCity(string $city): array
     {
-        $foundDoctors = [];
+        $result = [];
         $file = file_get_contents(config('file.path.database'));
         $doctorsList = json_decode($file, true);
         foreach ($doctorsList as $doctor) {
             if ($doctor) {
                 if ($doctor['city'] === $city) {
-                    array_push($foundDoctors, $this->doctorService->setDoctor($doctor));
+                    array_push($result, $this->doctorService->setDoctor($doctor));
                 }
+                unset($doctor);
             }
         }
-        return $foundDoctors;
+        unset($file, $doctorsList);
+        return $result;
     }
 
     /**
      * @param string $practice
      * @return array
      */
-    public function findDoctorsByPractice(string $practice): array
+    public function findByPractice(string $practice): array
     {
-        $foundDoctors = [];
+        $result = [];
         $file = file_get_contents(config('file.path.database'));
         $doctorsList = json_decode($file, true);
         foreach ($doctorsList as $doctor) {
             if ($doctor) {
-                if (in_array($doctor['practices'], [$practice])) {
-                    array_push($foundDoctors, $this->doctorService->setDoctor($doctor));
+                if (in_array($practice, $doctor['practices'])) {
+                    array_push($result, $this->doctorService->setDoctor($doctor));
                 }
+                unset($doctor);
             }
         }
-        return $foundDoctors;
+        unset($file, $doctorsList);
+        return $result;
     }
 }
