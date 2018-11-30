@@ -61,7 +61,7 @@ class SearchController
     public function search(Request $request): JsonResponse
     {
         $response = [];
-        $searchType = $request->get('search_type');
+        $searchType = $request->get('searchType');
         $city = $request->json()->get('city');
         $practice = $request->json()->get('practice');
         try {
@@ -70,21 +70,21 @@ class SearchController
                     case $searchType === static::SEARCH_BY_CITY_AND_PRACTICE: {
                         if ($city && $practice) {
                             $doctors = $this->doctorRepository->findByCityAndPractice($city, $practice);
-                            $response['doctors'] = $this->doctorService->formatDoctorForJsonResponse($doctors);
+                            $response = $this->doctorService->formatDoctorForJsonResponse($doctors);
                         }
                         break;
                     }
                     case $searchType === static::SEARCH_BY_CITY: {
                         if ($city) {
                             $doctors = $this->doctorRepository->findByCity($city);
-                            $response['doctors'] = $this->doctorService->formatDoctorForJsonResponse($doctors);
+                            $response = $this->doctorService->formatDoctorForJsonResponse($doctors);
                         }
                         break;
                     }
                     case $searchType === static::SEARCH_BY_PRACTICE: {
                         if ($practice) {
                             $doctors = $this->doctorRepository->findByPractice($practice);
-                            $response['doctors'] = $this->doctorService->formatDoctorForJsonResponse($doctors);
+                            $response = $this->doctorService->formatDoctorForJsonResponse($doctors);
                         }
                         break;
                     }
