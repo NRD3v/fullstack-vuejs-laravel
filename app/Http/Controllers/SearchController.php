@@ -96,6 +96,34 @@ class SearchController
         } catch (\Exception $e) {
             return response()->json($e->getMessage());
         }
-        return response()->json($this->practiceRepository->findAll());
+        return response()->json($response);
+    }
+
+    /**
+     * Returns UI links list leading to non-empty result(s) with city/practice combo
+     * @return array
+     */
+    public function findComboPracticesByCity(): array
+    {
+        $response = [];
+        $cities = $this->cityRepository->findAll();
+        $practices = $this->practiceRepository->findAll();
+
+        foreach ($cities as $city) {
+            foreach ($practices as $practice) {
+                $doctor = $this->doctorRepository->findByCityAndPractice($city, $practice);
+                if ($doctor) {
+                    if (!array_key_exists($city, $response)) {
+                        $response += [$city => []];
+                    }
+                    if (in_array($practice, $response[$city])) {
+                        next($practices);
+                    } else {
+                        array_push($response[$city], $practice);
+                    }
+                }
+            }
+        }
+        return $response;
     }
 }
