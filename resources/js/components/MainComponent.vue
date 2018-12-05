@@ -1,22 +1,24 @@
 <template>
     <div>
-        <div>
-            <h1 class="display-3 text-center"><img src="https://www.medoucine.com/images/logos/logo.svg" width="350"/></h1>
+        <div class="bgc p10">
+            <div>
+                <h1 class="display-3 text-center"><img src="https://www.medoucine.com/images/logos/logo.svg" width="350"/></h1>
+            </div>
+
+            <form v-on:submit.prevent="onSubmit" class="row offset-2 col-8">
+                <select v-model="city" @change="setCity(city)" class="col-4 custom-select">
+                    <option>Choisir une ville</option>
+                    <option v-for="(city, index) in links" :value="index">{{ index }}</option>
+                </select>
+
+                <select v-model="practice" @change="setPractice(practice)" class="col-4 custom-select">
+                    <option>Choisir une spécialité</option>
+                    <option v-for="practice in linkedPracticesToSelectedCity" :value="practice">{{ practice }}</option>
+                </select>
+
+                <button class="btn btn-primary col-4" @submit="onSubmit()">ENVOYER</button>
+            </form>
         </div>
-
-        <form v-on:submit.prevent="onSubmit" class="row offset-2 col-8">
-            <select v-model="city" @change="setCity(city)" class="col-4 custom-select">
-                <option selected>Choisir une ville</option>
-                <option v-for="(city, index) in links" :value="index">{{ index }}</option>
-            </select>
-
-            <select v-model="practice" @change="setPractice(practice)" class="col-4 custom-select">
-                <option selected>Choisir une spécialité</option>
-                <option v-for="practice in linkedPracticesToSelectedCity" :value="practice">{{ practice }}</option>
-            </select>
-
-            <button class="btn btn-primary col-4" @submit="onSubmit()">ENVOYER</button>
-        </form>
 
         <div id="doctors" class="row offset-2 col-8">
             <doctor-component v-for="(doctor, key) in doctors"
@@ -24,8 +26,8 @@
             </doctor-component>
         </div>
 
-        <div style="border-top: 1px solid #dbe0e0">
-            <div id="links" class="row offset-2 col-8">
+        <div class="bt1 mt20">
+            <div id="links" class="row mt10 offset-2 col-8">
                 <link-component v-for="(city, index) in links"
                                 :class="'col-' + [12 / Object.keys(links).length]"
                                 v-bind:city="city" v-bind:cityName="index" v-bind:key="index"
@@ -84,3 +86,11 @@
         }
     }
 </script>
+<style scoped>
+    select, button {
+        border-radius: 0;
+    }
+    .bgc {
+        background-color: #ECF1F4;
+    }
+</style>
