@@ -5,7 +5,7 @@
                 <h1 class="display-3 text-center"><img src="https://www.medoucine.com/images/logos/logo.svg" width="350"/></h1>
             </div>
 
-            <form v-on:submit.prevent="onSubmit" class="row offset-2 col-8">
+            <form v-on:submit.prevent="onSubmit" class="row offset-2 col-8 mt30 mb20">
                 <select v-model="city" @change="setCity(city)" class="col-4 custom-select">
                     <option>Choisir une ville</option>
                     <option v-for="(city, index) in links" :value="index">{{ index }}</option>
@@ -74,13 +74,16 @@
                 this.linkedPracticesToSelectedCity = this.links[city];
                 this.city = city;
                 this.practice = null;
+                store.links.dispatch('setLinkHighlight', undefined);
                 store.doctors.dispatch('setDoctors', null)
             },
             setPractice(practice) {
                 this.practice = practice;
             },
             search(city, practice) {
+                console.log(city, practice);
                 let params = {city, practice, searchType: 'search_by_city_and_practice'};
+                store.links.dispatch('setLinkHighlight', city + practice);
                 store.doctors.dispatch('setDoctors', params);
             }
         }
