@@ -4,12 +4,19 @@ Vue.use(Vuex);
 
 export const links = new Vuex.Store({
     state: {
-        list: []
+        links: []
     },
     getters: {
-        list: state => state.list
+        links: state => state.links
     },
     mutations: {
-        setList: (state, payload) => state.list = payload
+        setLinksList(state) {
+            return window.axios.get('/links').then(response => {
+                state.links = !response.data.empty ? response.data : []
+            });
+        }
+    },
+    actions: {
+        setLinks: (context) => context.commit('setLinksList')
     }
 });

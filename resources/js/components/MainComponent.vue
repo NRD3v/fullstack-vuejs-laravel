@@ -4,8 +4,6 @@
             <h1 class="display-3 text-center"><img src="https://www.medoucine.com/images/logos/logo.svg" width="350"/></h1>
         </div>
 
-        {{ message }}
-
         <form v-on:submit.prevent="onSubmit" class="row offset-2 col-8">
             <select v-model="city" @change="setCity(city)" class="col-4 custom-select">
                 <option selected>Choisir une ville</option>
@@ -39,26 +37,25 @@
 </template>
 
 <script>
-    import {store} from '../store/index'
+    import { store } from '../store/index'
     export default {
         computed: {
             doctors() {
                 return store.doctors.getters.doctors
             },
-            message() {
-                return store.helloWorld.getters.message
+            links() {
+                return store.links.getters.links
             }
         },
         data() {
             return {
                 city: null,
                 linkedPracticesToSelectedCity: [],
-                links: [],
                 practice: null
             }
         },
         created() {
-            window.axios.get('/links').then(response => this.links = response.data);
+            store.links.dispatch('setLinks')
         },
         methods: {
             onLinkClick([cityName, practice]) {
