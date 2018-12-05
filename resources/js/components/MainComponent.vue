@@ -89,6 +89,7 @@
         }
     }
 </script>
+
 <style scoped>
     select, button {
         border-radius: 0;

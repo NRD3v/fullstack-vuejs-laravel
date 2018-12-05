@@ -25,6 +25,7 @@
         props: ['doctor']
     }
 </script>
+
 <style scoped>
     .doctor-container {
         border: 1px solid #dbe0e0;

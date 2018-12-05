@@ -1,3 +1,4 @@
+import ApiService from "../services/ApiService";
 import Vue from 'vue'
 import Vuex from 'vuex'
 Vue.use(Vuex);
@@ -11,8 +12,8 @@ export const doctors = new Vuex.Store({
     },
     mutations: {
         setDoctorsList(state, payload) {
-            return window.axios.post('/search', payload).then(response => {
-                state.doctors = !response.data.empty ? response.data : []
+            ApiService.search(payload).then((response) => {
+                state.doctors = !response.empty ? response : [];
             });
         }
     },

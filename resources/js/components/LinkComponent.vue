@@ -26,6 +26,7 @@
         props: ['city', 'cityName']
     }
 </script>
+
 <style scoped>
     li.highlight {
         font-weight: bold;

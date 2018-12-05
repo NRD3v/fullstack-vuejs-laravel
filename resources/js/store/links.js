@@ -1,3 +1,4 @@
+import ApiService from "../services/ApiService";
 import Vue from 'vue'
 import Vuex from 'vuex'
 Vue.use(Vuex);
@@ -13,15 +14,14 @@ export const links = new Vuex.Store({
     },
     mutations: {
         setLinksList(state) {
-            return window.axios.get('/links').then(response => {
-                state.links = !response.data.empty ? response.data : []
+            ApiService.getLinks().then((response) => {
+                state.links = !response.empty ? response : [];
             });
         },
         setLinkHighlighted: (state, payload) => state.linkHighlighted = payload
-
     },
     actions: {
-        setLinks: (context) => context.commit('setLinksList'),
+        setLinks: context => context.commit('setLinksList'),
         setLinkHighlight: (context, payload) => context.commit('setLinkHighlighted', payload)
     }
 });
