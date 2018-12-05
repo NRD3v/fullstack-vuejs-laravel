@@ -78,10 +78,10 @@
                 store.doctors.dispatch('setDoctors', null)
             },
             setPractice(practice) {
+                store.links.dispatch('setLinkHighlight', undefined);
                 this.practice = practice;
             },
             search(city, practice) {
-                console.log(city, practice);
                 let params = {city, practice, searchType: 'search_by_city_and_practice'};
                 store.links.dispatch('setLinkHighlight', city + practice);
                 store.doctors.dispatch('setDoctors', params);
