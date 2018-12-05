@@ -1,19 +1,24 @@
 <template>
-    <div v-if="doctor" class="col-6 p20">
-        <div class="row doctor-container min-h130">
-            <div class="col-4 align-middle p10">
-                <img src="../../images/Photo.jpg" class="imageRadius2" width="120">
-            </div>
-            <div class="col-8">
-                <div class="h120 p10">
-                    <h5>{{ doctor.name }}</h5>
-                    <h6 class="grey">{{ doctor.city }}</h6>
-                    <p class="small">
-                        <span v-for="(practice, index) in doctor.practice">
-                            <span>{{ practice }}</span><span v-if="index + 1 < doctor.practice.length">, </span>
+    <div v-if="doctor" class="col-6 p10">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-4">
+                        <img src="../../images/Photo.jpg" class="imageRadius2" width="100">
+                    </div>
+                    <div class="col-8 card-text h-50 maxh50">
+                        <span>{{ doctor.name }}</span>
+                        <br>
+                        <span class="grey">{{ doctor.city }}</span>
+                        <br>
+                        <span class="small">
+                            <span v-for="(practice, index) in doctor.practice">
+                                <span>{{ practice }}</span><span v-if="index + 1 < doctor.practice.length">, </span>
+                            </span>
                         </span>
-                    </p>
-                    <p class="small font-weight-bold text-primary">Prendre un RDV</p>
+                        <br>
+                        <span class="small font-weight-bold text-primary">Prendre un RDV</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -25,16 +30,3 @@
         props: ['doctor']
     }
 </script>
-
-<style scoped>
-    .doctor-container {
-        border: 1px solid #dbe0e0;
-        border-radius: 2px;
-    }
-    .grey {
-        color: #C6C6C6;
-    }
-    .imageRadius2 {
-        border-radius: 2px
-    }
-</style>
