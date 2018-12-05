@@ -11,13 +11,9 @@ export const doctors = new Vuex.Store({
     },
     mutations: {
         setDoctorsList(state, payload) {
-            if (payload) {
-                window.axios.post('/search', payload).then(response => {
-                    state.doctors = response.data
-                });
-            } else {
-                state.doctors = []
-            }
+            return window.axios.post('/search', payload).then(response => {
+                state.doctors = !response.data.empty ? response.data : []
+            });
         }
     },
     actions: {

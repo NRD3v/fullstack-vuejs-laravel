@@ -34,5 +34,5 @@ Vue.component('link-component', require('./components/LinkComponent.vue'));
  */
 
 const app = new Vue({
-    el: '#app',
+    el: '#app'
 });

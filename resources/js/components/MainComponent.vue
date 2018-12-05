@@ -39,13 +39,19 @@
 </template>
 
 <script>
-    import { store } from "../store/index";
+    import {store} from '../store/index'
     export default {
+        computed: {
+            doctors() {
+                return store.doctors.getters.doctors
+            },
+            message() {
+                return store.helloWorld.getters.message
+            }
+        },
         data() {
             return {
                 city: null,
-                doctors: store.doctors.getters.doctors,
-                message: store.helloWorld.getters.message,
                 linkedPracticesToSelectedCity: [],
                 links: [],
                 practice: null
