@@ -7,12 +7,12 @@
 
             <form v-on:submit.prevent="onSubmit" class="row offset-2 col-8 mt30 mb20">
                 <select v-model="city" @change="setCity(city)" class="col-4 custom-select">
-                    <option>Choisir une ville</option>
+                    <option :value="null">Choisir une ville</option>
                     <option v-for="(city, index) in links" :value="index">{{ index }}</option>
                 </select>
 
                 <select v-model="practice" @change="setPractice(practice)" class="col-4 custom-select">
-                    <option>Choisir une spécialité</option>
+                    <option :value="null">Choisir une spécialité</option>
                     <option v-for="practice in linkedPracticesToSelectedCity" :value="practice">{{ practice }}</option>
                 </select>
 
